@@ -27,7 +27,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
 
-    compile project (':annotations')
+    provided project (':auto-enum-extension-annotation')
     apt project(':processor')
     testCompile 'junit:junit:4.12'
 }

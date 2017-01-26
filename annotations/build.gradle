@@ -1,8 +1,22 @@
 apply plugin: 'java'
-
+apply plugin: 'maven'
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+
+project.group = rootProject.ext.groupId
+project.archivesBaseName = rootProject.ext.artifactId
+project.version = rootProject.ext.versionName
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: repositories.jcenter().url)
+        snapshotRepository(url: repositories.mavenLocal().url)
+        pom.groupId = rootProject.ext.groupId
+        pom.artifactId = "${rootProject.ext.artifactId}-annotation"
+        pom.version = rootProject.ext.versionName
+    }
+}

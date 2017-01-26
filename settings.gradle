@@ -1,1 +1,4 @@
 include ':app', ':annotations', ':processor'
+rootProject.children.each {
+    it.name = ('annotations' == it.name ? 'auto-enum-extension-annotation' : it.name)
+}
