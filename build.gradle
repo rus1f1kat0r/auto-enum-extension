@@ -19,7 +19,7 @@ allprojects {
 }
 
 ext {
-    groupId = 'ru.rus1f1kat0r'
+    groupId = 'io.github.rus1f1kat0r'
     artifactId = 'auto-enum-extension'
     versionName = '0.0.1-SNAPSHOT'
 }

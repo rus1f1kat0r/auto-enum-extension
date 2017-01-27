@@ -1,5 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'signing'
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
@@ -7,16 +9,63 @@ dependencies {
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+signing {
+    sign configurations.archives
+}
+
+
 project.group = rootProject.ext.groupId
-project.archivesBaseName = rootProject.ext.artifactId
+project.archivesBaseName = "${rootProject.ext.artifactId}-annotation"
 project.version = rootProject.ext.versionName
 
 uploadArchives {
-    repositories.mavenDeployer {
-        repository(url: repositories.jcenter().url)
-        snapshotRepository(url: repositories.mavenLocal().url)
-        pom.groupId = rootProject.ext.groupId
-        pom.artifactId = "${rootProject.ext.artifactId}-annotation"
-        pom.version = rootProject.ext.versionName
+    repositories{
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+            pom.project {
+                name 'Auto enum extension annotation'
+                packaging 'jar'
+                description ''
+                url 'https://github.com/rus1f1kat0r/auto-enum-extension'
+                scm {
+                    url 'https://github.com/rus1f1kat0r/auto-enum-extension'
+                }
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'rus1f1kat0r'
+                        name 'Kirill Kharkov'
+                        email 'xka39k@gmail.com'
+                    }
+                }
+            }
+        }
     }
 }
