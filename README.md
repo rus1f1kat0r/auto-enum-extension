@@ -10,7 +10,9 @@ This processor will take names and create extensible enum automatically for you.
 * Add annotation dependency to your project
 
 ```
-provided 'ru.rus1f1kat0r:auto-enum-extension-annotation:0.0.1-SNAPSHOT'
+dependencies {
+    provided 'io.github.rus1f1kat0r:auto-enum-extension-annotation:0.0.2-SNAPSHOT'
+}
 ```
 
 * Add annotation to empty interface, and define enumeration of values with `@AutoEnum` annotation 
@@ -24,15 +26,43 @@ public interface Type {
 
 **Note:** AutoEnum will generate enum and visitor interface in the same package.
 
-* Provide AutoEnum processor for apt (Android project)
+* Apply apt plugin (Android project)
 
 ```
 apply plugin: 'com.neenbedankt.android-apt'
+...
+buildscript {
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+    ...
+}
 
-... 
+```
 
+* Or java project (net.ltgt.apt is just what I have tried)
+
+```
+apply plugin: "net.ltgt.apt"
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
+    }
+}
+
+```
+
+* Provide annotation processor to your build
+
+```
 dependencies {
-    apt 'ru.rus1f1kat0r:auto-enum-extension:0.0.1-SNAPSHOT'
+    apt 'io.github.rus1f1kat0r:auto-enum-extension:0.0.2-SNAPSHOT'
 }
 
 ```
