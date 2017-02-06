@@ -11,7 +11,7 @@ This processor will take names and create extensible enum automatically for you.
 
 ```
 dependencies {
-    provided 'io.github.rus1f1kat0r:auto-enum-extension-annotation:0.0.2-SNAPSHOT'
+    provided 'io.github.rus1f1kat0r:auto-enum-extension-annotation:0.0.2'
 }
 ```
 
@@ -62,7 +62,7 @@ buildscript {
 
 ```
 dependencies {
-    apt 'io.github.rus1f1kat0r:auto-enum-extension:0.0.2-SNAPSHOT'
+    apt 'io.github.rus1f1kat0r:auto-enum-extension:0.0.2'
 }
 
 ```
