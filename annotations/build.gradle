@@ -46,7 +46,7 @@ uploadArchives {
             pom.project {
                 name 'Auto enum extension annotation'
                 packaging 'jar'
-                description ''
+                description 'Auto enum extension annotation for triggering apt tool and generate enum'
                 url 'https://github.com/rus1f1kat0r/auto-enum-extension'
                 scm {
                     url 'https://github.com/rus1f1kat0r/auto-enum-extension'

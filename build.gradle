@@ -21,7 +21,7 @@ allprojects {
 ext {
     groupId = 'io.github.rus1f1kat0r'
     artifactId = 'auto-enum-extension'
-    versionName = '0.0.1-SNAPSHOT'
+    versionName = '0.0.2'
 }
 
 task clean(type: Delete) {
